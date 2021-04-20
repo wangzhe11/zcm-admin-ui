@@ -1,18 +1,15 @@
-import Hello from '../hello'
+import { App } from 'vue'
 
-const components = [Hello]
+import ElButton from '../button'
 
-const install = app => {
+const components = [ElButton]
+
+const install = (app: App): void => {
   components.forEach(component => {
     app.component(component.name, component)
   })
 }
 
-export {
-  Hello,
-  install
-}
+export { ElButton, install }
 
-export default {
-  install
-}
+export default { install }

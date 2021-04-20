@@ -1,17 +1,15 @@
 <template>
-  <div class="app">
-    <Hello :name="name"></Hello>
-  </div>
+  <header class="admin-header">header</header>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from 'vue'
 
 export default defineComponent({
-  name: 'app',
-  setup(props, ctx) {
+  name: 'AdminHeader',
+  setup() {
     const state = reactive({
-      name: 'admin ui'
+      msg: 'hello, admin-header'
     })
 
     return {
@@ -20,3 +18,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped lang="scss">
+.admin-header {
+  height: 50px;
+  background: green;
+}
+</style>
