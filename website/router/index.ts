@@ -1,41 +1,46 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
 import { nextTick } from 'vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import hljs from 'highlight.js'
 import { navs } from '../nav.config'
+import i18n from '../locales'
 
-// import { getLang } from '../utils/lang'
-
-// const lang = getLang()
+const { locale } = i18n.global
 
 export const indexRoute = [
-  // {
-  //   path: `/${lang}`,
-  //   name: 'HomePage-' + lang,
-  //   meta: {
-  //     name: 'HomePage',
-  //     lang
-  //   },
-  //   component: () => import(`../markdown/${lang}/index.md`)
-  // }
+  {
+    path: '/',
+    redirect: '/installation'
+  }
 ]
 
 const componentRoutes = []
 
 navs.forEach(navItem => {
-  navItem.groups.forEach(groupItem => {
-    groupItem.list.forEach(item => {
-      if (item.path !== '/') {
+  if (navItem.groups) {
+    navItem.groups.forEach(groupItem => {
+      groupItem.list.forEach(item => {
         componentRoutes.push({
           path: item.path,
-          name: item.path.slice(1),
+          name: item.name,
           meta: {
-            name: item.path.slice(1)
+            name: item.name
           },
           component: item.component
         })
-      }
+      })
     })
-  })
+  } else {
+    navItem.list.forEach(item => {
+      componentRoutes.push({
+        path: item.path,
+        name: item.name,
+        meta: {
+          name: item.name
+        },
+        component: item.component
+      })
+    })
+  }
 })
 
 const routes = [...indexRoute, ...componentRoutes]
@@ -43,6 +48,11 @@ const routes = [...indexRoute, ...componentRoutes]
 const router = createRouter({
   history: createWebHashHistory(),
   routes: routes
+})
+
+router.beforeEach((to, from, next) => {
+  console.log('语言 :>> ', locale)
+  next()
 })
 
 router.afterEach(() => {
