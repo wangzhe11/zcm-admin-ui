@@ -5,9 +5,10 @@ body {
   margin: 0;
   overflow: hidden;
   font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
-    SimSun, sans-serif;
+  SimSun, sans-serif;
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
+  color: #333;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -21,11 +22,16 @@ ul, li {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: #f2f3f7;
 }
 
 a {
-  color: #409eff;
+  color: #333;
   text-decoration: none;
+}
+
+pre {
+  margin: 0;
 }
 
 code {
